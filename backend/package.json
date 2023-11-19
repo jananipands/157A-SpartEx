@@ -1,0 +1,14 @@
+{
+  "name": "157a-spartex",
+  "version": "1.0.0",
+  "description": "- to do (JANANI): initialize react app, get env set up + install dependencies",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "Janani Pandurangan & Gunraj Singh",
+  "license": "ISC"
+}
