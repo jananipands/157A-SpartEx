@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+body, html {
+    height: 100%;
+}
+
+* {
+    font-family: 'Inter', 'sans-serif';
+    margin: 0;
+    padding: 0;
+    background-color: #0055A2;
+}
+
+.homepage-container {
+    width: 100%;
+    min-height: 100vh; /* Set a minimum height in viewport height units */
+}
+
+.homepage-navbar-container{
+    width: 100%;
+    height: 10vh; /* Change the percentage to vh (viewport height) */
+}
+
+.navbar-list{
+    padding-inline: 2% 5%;
+    padding-top: 0.5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-list li{
+    list-style-type: none;
+    font-family: inherit;
+    font-size: 18px;
+    color: #f1f1f1;
+}
+
+.homepage-navbar-logo{
+    width: 100%;
+    height: auto;
+}
+
+.cta-container{
+    width: 100%;
+    height: 50vh;
+    display: block;
+    justify-content: center;
+    margin-top: 1vh;
+}
+
+.cta-quote{
+    width: 100%;
+    height: 18vh;
+    font-weight:400;
+    margin-top: 5%;
+}
+.cta-quote p{
+    color: #e6e5e5;
+    font-size: 50px;
+}
+
+.s-to-s-highlight{
+    box-shadow: inset 5em 2em #CFA64C;
+    border-radius: 30px;
+    padding-inline: 1% 1%;
+    border: 1px #b18e42 solid;
+}
+
+.cta-made-by-container{
+    color: #f1f1f1;
+    font-size: 16px;
+    margin-top: 2%;
+}
+
+.cta-made-by-container p{
+    font-weight: lighter;
+}
+
+
+
+
+
+
+
