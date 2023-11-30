@@ -1,13 +1,15 @@
-* {
+.background-div{
+    height: 100%;
     background-color: white;
 }
 
 .paper-style{
     padding: 10px;
-    height: 60vh;
+    height: 64vh;
     width: 350px;
     margin-top: 9%;
     margin-inline: 36% 10%;
+    
 }
 
 .submit-btn{

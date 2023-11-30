@@ -3,28 +3,28 @@ import "./login.css";
 import TextField from "@material-ui/core/TextField"
 import { Avatar, Grid, Paper, Typography } from '@material-ui/core';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
-import { Button, Stack } from "@mui/material";
-import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
-import { blue } from '@material-ui/core/colors';
+import { Button } from "@mui/material";
+import ReactDOM from "react-dom";
+import { Link } from 'react-router-dom';
 
 
 function Login(){
     const lockStyle = {backgroundColor: 'goldenrod', margin: 'auto'};
-    const[username, setUsername] = useState("");
+    const[sjsuid, setSJSUID] = useState("");
     const[password, setPassword] = useState("");
 
     const handleSubmit = () => {
-        console.log(username);
+        console.log(sjsuid);
 
         // finish login logic here!
     }
 
     return (
-        <Grid style={{backgroundColor:'white'}}>
-            <Paper component={Stack} elevation={10} className='paper-style'>
+        <div className="background-div">
+            <Paper elevation={10} className='paper-style'>
                 <form onSubmit={handleSubmit}>
                     <Grid container direction='column' spacing={5} 
-                        style={{width: '100%', margin: 'auto'}}>
+                        style={{width: '100%', margin: 'auto', backgroundColor: 'white', color: 'black'}}>
                         <Grid item>
                             <Avatar style={lockStyle}>
                                 <LockOpenOutlinedIcon style={lockStyle}/>
@@ -32,19 +32,20 @@ function Login(){
                         </Grid>
 
                         <Grid item>
-                            <Typography variant='h5' style={{fontWeight: 'bold'}}>Sign in</Typography>
+                            <Typography variant='h5' style={{fontWeight: 'bold', textAlign: "center"}}>Sign in</Typography>
                         </Grid>
 
                         <Grid item>
                             <TextField
-                                id="username-login"
-                                label='Username' 
-                                placeholder='Enter username' 
-                                fullWidth 
+                                id="sjsuid-login"
+                                label='SJSU ID' 
+                                placeholder='Enter SJSU ID' 
+                                fullWidth
+                                variant="filled"
                                 required
-                                value={username}
+                                value={sjsuid}
                                 onChange={(e) => {
-                                    setUsername(e.target.value);
+                                    setSJSUID(e.target.value);
                                 }}
                             />
                         </Grid>
@@ -55,6 +56,7 @@ function Login(){
                                 label='Password'
                                 placeholder='Enter password'
                                 type='password'
+                                variant="filled"
                                 fullWidth
                                 required
                                 value={password}
@@ -63,6 +65,12 @@ function Login(){
                                 }}
                             />
                         </Grid>
+
+                        <Grid item>
+                            <Link to="/createacct" style={{color: 'grey', textAlign: 'center', fontSize: 15}}
+                            > Don't have an account? Create one here! </Link>
+                        </Grid>
+
                         <Grid item>
                             <Button variant="contained" 
                             type="submit" 
@@ -75,7 +83,9 @@ function Login(){
                     </Grid>
                 </form>
             </Paper>
-        </Grid>
+           
+        </div>
+        
     );
 }
 
