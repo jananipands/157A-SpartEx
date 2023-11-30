@@ -3,8 +3,6 @@ import React, {useState, useEffect} from 'react';
 import "./createaccount.css";
 import { Button } from "@mui/material";
 
-
-
 function CreateAccount(){
     const [userData, setUserData] = useState({
         first_name: '',
