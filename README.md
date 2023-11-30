@@ -5,7 +5,7 @@
 - [ ] Dashboard/See Listings page
 - [X] Create new user account page
 - [ ] Manage Listings page (with functionality to add or remove current listings)
-- [ ] Add Furniture (done), Appliance (done), and Textbook pages
+- [X] Add Furniture (done), Appliance (done), and Textbook pages
 - [ ] Figure out data transmission from frontend to backend
 
 ## To-do Gunraj:
