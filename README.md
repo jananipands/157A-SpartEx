@@ -1,13 +1,14 @@
 # 157A-SpartEx
 
 ## To-do Janani:
-- [ ] Card Component w/ props
-- [ ] Dashboard/Search page
-- [ ] Add item page with name
-- [ ] Create new user account page
+- [X] Item card and Modal Component w/ props
+- [ ] Dashboard page
+- [X] Create new user account page
+- [ ] Update Listings page (with functionality to add or remove current listings)
+- [ ] Figure out data transmission from frontend to backend
 
 ## To-do Gunraj:
-- [ ] Set up SQL databases locally
-- [ ] Set up connection to SQL database via NodeJS
+- [X] Set up SQL databases locally
+- [ ] **Set up connection to SQL database via NodeJS**
 - [ ] Make Schemas for each database
 - [ ] Ensure that data acquired from page is sent to Backend
