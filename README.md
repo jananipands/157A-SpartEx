@@ -2,9 +2,9 @@
 
 ## To-do Janani:
 - [X] Item card and Modal Component w/ props
-- [ ] Dashboard/See Listings page
+- [X] Dashboard/See Listings page
 - [X] Create new user account page
-- [ ] Manage Listings page (with functionality to add or remove current listings)
+- [X] Manage Listings page (with functionality to add or remove current listings), not sure how to update?
 - [X] Add Furniture (done), Appliance (done), and Textbook pages
 - [ ] Figure out data transmission from frontend to backend
 
