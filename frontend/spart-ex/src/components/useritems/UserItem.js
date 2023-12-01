@@ -1,15 +1,19 @@
 import {
-Card,
-CardContent,
-CardHeader,
-Typography,
-CardMedia,
-Button,
-Modal,
-Box,
+    Card,
+    CardContent,
+    CardHeader,
+    Typography,
+    CardMedia,
+    Button,
+    Modal,
+    Box,
+    Tooltip,
+    IconButton,
 } from "@material-ui/core";
 import ReactDOM from "react-dom";
 import { useState } from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 const props = {
     item_name: "Database Management Systems Textbook",
@@ -38,9 +42,27 @@ const modal_style = {
     p: 4,
 };
 
-function MoreInfoModal() {}
+const handleDelete = () => {
+    // add functionality here
+    console.log('clicked delete');
+}
 
-function Item(props) {
+function ItemTitle(props){
+    return (
+        <div style={{display:'flex', justifyContent:'space-between', 
+        verticalAlign:'baseline'}}>
+            <Typography variant="h5" style={{marginTop:'7px'}}>{props.item_name}</Typography>
+            <Tooltip title="delete">
+                <IconButton onClick={handleDelete}>
+                    <DeleteIcon style={{backgroundColor: 'white', color: 'red', marginTop:'0px'}}/>
+                </IconButton>
+            </Tooltip>
+        </div>
+    );
+}
+
+
+function UserItem(props) {
     const [isOpen, setOpen] = useState(false);
 
     const handleOpen = () => {
@@ -52,16 +74,18 @@ function Item(props) {
     };
 
     return (
-        <div style={{height: '200px', width: '300px'}}>
+        <div style={{ height: '200px', width: '300px' }}>
             <Card sx={{ height: '200px', width: '300px' }}>
-                <CardHeader title={props.item_name} subheader={props.seller_name} />
+                <CardHeader title={<ItemTitle{...props}/>} subheader={props.seller_name} />
                 <CardMedia component="img" height="150" image={props.img_url} />
 
                 <CardContent>
                     <Typography variant="body1">Price: {props.price}</Typography>
                     <Typography varaint="body1">Condition: {props.condition}</Typography>
-                    <Button variant="outlined" onClick={handleOpen}>More info</Button>
-                    <Modal open={isOpen} onClose={handleClose} style={{height: 500, width: 500, position:'absolute', margin:'auto'}}>
+                    <Button variant="outlined" onClick={handleOpen}
+                    
+                    style={{marginTop:'5px'}}>More info</Button>
+                    <Modal open={isOpen} onClose={handleClose} style={{ height: 500, width: 500, position: 'absolute', margin: 'auto' }}>
                         <Box sx={modal_style}>
                             <Card sx={{ height: 450, width: 350 }}>
                                 <CardHeader
@@ -72,7 +96,7 @@ function Item(props) {
                                     <CardMedia
                                         component="img"
                                         height="150"
-                                        image={props.image_url}
+                                        image={props.img_url}
                                     />
 
                                     <Typography variant="body1" style={{ marginTop: 10 }}>
@@ -102,8 +126,8 @@ function Item(props) {
                 </CardContent>
             </Card>
         </div>
-        
+
     );
 }
 
-export default Item;
+export default UserItem;

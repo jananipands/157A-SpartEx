@@ -1,24 +1,25 @@
 import { Grid, TextField, Typography, Paper } from '@material-ui/core';
 import React, {useState, useEffect} from 'react';
-import "./createaccount.css";
+import "./addappliance.css";
 import { Button } from "@mui/material";
-import { grey } from '@material-ui/core/colors';
+import UserNavbar from '../../usernavbar/UserNavbar';
 
-function CreateAccount(){
-    const [userData, setUserData] = useState({
-        first_name: '',
-        last_name: '',
-        password: '',
-        sjsu_id: '',
-        phone_number: '',
-        insta_id: '',
-        messenger_id: '',
+function AddAppliance(){
+    const [applData, setApplData] = useState({
+        item_name: '',
+        item_id: null,
+        img_url: '',
+        condition: '',
+        price: '',
+        details: '',
+        color: '',
+        seller_id: ''
     });
 
     // ... takes prevData and spreads it
     const handleFormChange = (e) => {
         const { name, value } = e.target;
-        setUserData((prevData) => ({ 
+        setApplData((prevData) => ({ 
             ...prevData,
             [name]: value,
         }));
@@ -27,7 +28,7 @@ function CreateAccount(){
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(userData);
+        console.log(applData);
 
         // pass data to backend database (Create)
     }
@@ -35,25 +36,21 @@ function CreateAccount(){
 
     return (
         <div className="ca-container">
+            <UserNavbar />
             <div className="ca-text-div">
-                <Typography variant='h4' align='center' className='ca-text'>Welcome, Spartan!</Typography>
-                <Typography variant='body1' align='center' style={{color: 'grey'}}>
-                    Tell us a little more about yourself.</Typography>
+                <Typography variant='h4' align='center' className='ca-text'>List an Appliance</Typography>
             </div>
             
             <Paper elevation={10} className="ca-paper-style">
                 <form onSubmit={handleSubmit}>
                     <Grid container direction='column' spacing={2}>
                         <Grid item>
-                            <Typography variant="h6" style={{textAlign: 'center'}}>Personal Information</Typography>
-                        </Grid>
-                        <Grid item>
                             <TextField
                                 variant="outlined"
                                 className="input"
-                                label="First Name"
-                                value={userData.first_name}
-                                name="first_name"
+                                label="Item Name"
+                                value={applData.item_name}
+                                name="item_name"
                                 onChange={handleFormChange}
                                 fullWidth
                                 required
@@ -64,9 +61,24 @@ function CreateAccount(){
                             <TextField
                                 variant="outlined"
                                 className="input"
-                                label="Last Name"
-                                value={userData.last_name}
-                                name="last_name"
+                                label="Item Image"
+                                value={applData.img_url}
+                                name="img_url"
+                                onChange={handleFormChange}
+                                placeholder='URL'
+                                fullWidth
+                                required
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item>
+                            <TextField
+                                variant="outlined"
+                                className="input"
+                                label="Item Price"
+                                value={applData.price}
+                                name="price"
+                                placeholder='$XX.XX'
                                 onChange={handleFormChange}
                                 fullWidth
                                 required
@@ -77,90 +89,74 @@ function CreateAccount(){
                             <TextField
                                 variant="outlined"
                                 className="input"
-                                label="SJSU ID"
-                                value={userData.sjsu_id}
-                                name="sjsu_id"
+                                label="Item Condition"
+                                type="text"
+                                value={applData.condition}
+                                name="condition"
+                                onChange={handleFormChange}
+                                placeholder='Excellent, Good, Fair'
+                                fullWidth
+                                required
+                                size="small"
+                            />
+                        </Grid>
+                       
+                        <Grid item>
+                            <TextField
+                                variant="outlined"
+                                className="input"
+                                label="Item Description"
+                                value={applData.details}
+                                name="details"
+                                onChange={handleFormChange}
+                                fullWidth
+                                required
+                                size="small"
+                                multiline
+                            />
+                        </Grid>
+                        <Grid item>
+                            <TextField
+                                variant="outlined"
+                                className="input"
+                                label="Item Color"
+                                value={applData.color}
+                                name="color"
+                                onChange={handleFormChange}
+                                fullWidth
+                                required
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item>
+                            <TextField
+                                variant="outlined"
+                                className="input"
+                                label="Seller SJSU ID"
+                                value={applData.seller_id}
+                                name="seller_id"
+                                onChange={handleFormChange}
                                 placeholder='Enter your 9-digit SJSU ID'
-                                onChange={handleFormChange}
                                 fullWidth
                                 required
                                 size="small"
                             />
                         </Grid>
-                        <Grid item>
-                            <TextField
-                                variant="outlined"
-                                className="input"
-                                label="Password"
-                                type="password"
-                                value={userData.password}
-                                name="password"
-                                onChange={handleFormChange}
-                                placeholder='Create a password'
-                                fullWidth
-                                required
-                                size="small"
-                            />
-                        </Grid>
-                        <Grid item>
-                            <Typography variant="h6" style={{textAlign: 'center'}}>Contact Information</Typography>
-                        </Grid>
-                        <Grid item>
-                            <TextField
-                                variant="outlined"
-                                className="input"
-                                label="Phone Number"
-                                value={userData.phone_number}
-                                name="phone_number"
-                                onChange={handleFormChange}
-                                placeholder="XXX-XXX-XXXX"
-                                fullWidth
-                                required
-                                size="small"
-                            />
-                        </Grid>
-                        <Grid item>
-                            <TextField
-                                variant="outlined"
-                                className="input"
-                                label="Instagram ID"
-                                value={userData.insta_id}
-                                name="insta_id"
-                                onChange={handleFormChange}
-                                fullWidth
-                                required
-                                size="small"
-                            />
-                        </Grid>
-                        <Grid item>
-                            <TextField
-                                variant="outlined"
-                                className="input"
-                                label="Messenger ID"
-                                value={userData.messenger_id}
-                                name="messenger_id"
-                                onChange={handleFormChange}
-                                fullWidth
-                                required
-                                size="small"
-                            />
-                        </Grid>
-                        <Grid item>
-                            <Button variant="contained" 
-                            type="submit" 
-                            disableRipple
-                            fullWidth
-                            color="primary">
-                                Sign in
-                            </Button>
-                        </Grid>
-
                     </Grid>
-                    {/* Add a submit button here if needed */}
+                    <Grid item>
+                        <Button variant="contained" 
+                                type="submit" 
+                                disableRipple
+                                fullWidth
+                                color="primary"
+                                style={{marginTop: 15, marginBottom: 5}}>
+                                   Add
+                        </Button>
+                    </Grid>
                 </form>
             </Paper>
         </div>
     )
 }
 
-export default CreateAccount;
+export default AddAppliance;

@@ -1,0 +1,30 @@
+.ca-container{
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    display: block;
+}
+
+.ca-text-div{
+   margin-top: 5%;
+   margin-bottom: 2%;
+}
+
+.ca-text{
+    font-weight: 800;
+    background: -webkit-linear-gradient(#0055A2, #5993c9);
+    background: linear-gradient(#0055A2, #5993c9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+
+.ca-paper-tbook{
+    padding: 10px;
+    height: auto;
+    width: 60%;
+    margin: auto;
+    align-items: center;
+}

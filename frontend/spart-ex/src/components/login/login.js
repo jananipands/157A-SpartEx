@@ -21,7 +21,7 @@ function Login(){
 
     return (
         <div className="background-div">
-            <Paper elevation={10} className='paper-style'>
+            <Paper elevation={10} className='login-paper-style'>
                 <form onSubmit={handleSubmit}>
                     <Grid container direction='column' spacing={5} 
                         style={{width: '100%', margin: 'auto', backgroundColor: 'white', color: 'black'}}>
