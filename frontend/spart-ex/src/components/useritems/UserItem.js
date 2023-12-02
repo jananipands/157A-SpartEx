@@ -13,6 +13,7 @@ import {
 import ReactDOM from "react-dom";
 import { useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 const props = {
@@ -43,7 +44,12 @@ const modal_style = {
 };
 
 const handleDelete = () => {
-    // add functionality here
+    // add functionality here, DELETE (http)
+    console.log('clicked delete');
+}
+
+const handleEdit = () => {
+    // add functionality here, PATCH (http)
     console.log('clicked delete');
 }
 
@@ -52,11 +58,19 @@ function ItemTitle(props){
         <div style={{display:'flex', justifyContent:'space-between', 
         verticalAlign:'baseline'}}>
             <Typography variant="h5" style={{marginTop:'7px'}}>{props.item_name}</Typography>
-            <Tooltip title="delete">
-                <IconButton onClick={handleDelete}>
-                    <DeleteIcon style={{backgroundColor: 'white', color: 'red', marginTop:'0px'}}/>
-                </IconButton>
-            </Tooltip>
+            <Box>
+                <Tooltip>
+                    <IconButton onClick={handleEdit}>
+                        <EditIcon style={{backgroundColor: 'white', color: 'gray', marginTop:'0px'}}/>
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title="edit-and-delete">
+                    <IconButton onClick={handleDelete}>
+                        <DeleteIcon style={{backgroundColor: 'white', color: 'red', marginTop:'0px'}}/>
+                    </IconButton>
+                </Tooltip>
+            </Box>
+            
         </div>
     );
 }

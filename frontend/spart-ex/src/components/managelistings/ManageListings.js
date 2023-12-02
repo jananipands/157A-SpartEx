@@ -11,6 +11,10 @@ function ManageListings(){
     // implement functionality to get user id if they are logged in
     const user_id = "016384939";
 
+    // backend to-do: retrieve User's listed items from SQL textbook, appliances, and furniture databases and send over here
+        // save as an array of JSON objects
+
+    // dummy data for testing
     const items = [ {
             item_name: 'Sofa',
             item_id: 1,

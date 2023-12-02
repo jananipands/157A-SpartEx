@@ -13,10 +13,6 @@ function AddTextbook() {
         condition: '',
         price: '',
         details: '',
-        subject: '',
-        author: '',
-        edition: '',
-        isbn: '',
         seller_id: ''
     });
 
@@ -34,7 +30,7 @@ function AddTextbook() {
 
         console.log(tbookData);
 
-        // pass data to backend database (Create)
+        // pass data to backend database (SQL Create)
     }
 
 
@@ -47,7 +43,7 @@ function AddTextbook() {
 
             <Paper elevation={10} className="ca-paper-tbook">
                 <form onSubmit={handleSubmit}>
-                    <Grid container spacing={2} style={{ display: 'flex', margin: 'auto', flexWrap: "nowrap", padding: 10, width: 'auto'}}>
+                    <Grid container spacing={2} style={{ display: 'flex', margin: 'auto', flexWrap: "nowrap", padding: 10, width: '100%'}}>
                         <Grid container direction='column' spacing={2}>
                             <Grid item>
                                 <TextField
@@ -135,69 +131,6 @@ function AddTextbook() {
                                 />
                             </Grid>
                         </Grid>
-
-                        <Grid container direction='column' spacing={2} style={{width:'60%', height: 'auto', alignItems:  "center"}}>
-                            <Grid item>
-                                <Typography variant="h6">More Information</Typography>
-                            </Grid>
-                            <Grid item>
-                                <TextField
-                                    variant="outlined"
-                                    className="input"
-                                    label="Subject/Course"
-                                    value={tbookData.subject}
-                                    name="subject"
-                                    onChange={handleFormChange}
-                                    fullWidth
-                                    required
-                                    size="small"
-                                />
-                            </Grid>
-                            <Grid item >
-                                <TextField
-                                    variant="outlined"
-                                    className="input"
-                                    label="Author"
-                                    value={tbookData.author}
-                                    name="author"
-                                    onChange={handleFormChange}
-                                    fullWidth
-                                    required
-                                    size="small"
-                                    placeholder='List the first author'
-                                />
-                            </Grid>
-                            <Grid item >
-                                <TextField
-                                    variant="outlined"
-                                    className="input"
-                                    label="Edition"
-                                    value={tbookData.edition}
-                                    name="edition"
-                                    onChange={handleFormChange}
-                                    fullWidth
-                                    required
-                                    size="small"
-                                />
-                            </Grid>
-                            <Grid item>
-                                <TextField
-                                    variant="outlined"
-                                    className="input"
-                                    label="ISBN Number"
-                                    value={tbookData.isbn}
-                                    name="isbn"
-                                    onChange={handleFormChange}
-                                    fullWidth
-                                    required
-                                    size="small"
-                                />
-                            </Grid>
-
-                        </Grid>
-
-
-
                     </Grid>
 
                     <Button variant="contained"
@@ -205,7 +138,7 @@ function AddTextbook() {
                         disableRipple
                         fullWidth
                         color="primary"
-                        style={{ marginTop: 15, marginBottom: 5 }}>
+                        style={{ marginTop: 15, marginBottom: 5}}>
                         Add
                     </Button>
 
