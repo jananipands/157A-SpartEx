@@ -3,8 +3,12 @@ import React, {useState, useEffect} from 'react';
 import "./addappliance.css";
 import { Button } from "@mui/material";
 import UserNavbar from '../../usernavbar/UserNavbar';
+import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
+
 
 function AddAppliance(){
+    const navigate = useNavigate();
     const [applData, setApplData] = useState({
         item_name: '',
         item_id: null,
@@ -28,15 +32,34 @@ function AddAppliance(){
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(applData);
-
+        try {
+            const response = await axios.post("http://localhost:9000/addappliance", {
+                item_name: applData.item_name,
+                image_url: applData.img_url,
+                appearance: applData.condition,
+                price: applData.price,
+                details: applData.details,
+                appearance_color: applData.color,
+                seller_id: applData.seller_id
+            }).then((res) => {
+                console.log('request sent!')
+                if(res.status >= 200 && res.status < 300){
+                    navigate('/managelistings', {state: {id: applData.seller_id}});
+                } else if (res.status === 401){
+                    alert('Please enter information properly!');
+                }
+            });
+            
+        } catch (err){
+            console.error('Something wrong addappliance.js: ', err);
+        }
         // pass data to backend database (Create)
     }
 
 
     return (
         <div className="ca-container">
-            <UserNavbar />
+            <UserNavbar id={applData.id}/>
             <div className="ca-text-div">
                 <Typography variant='h4' align='center' className='ca-text'>List an Appliance</Typography>
             </div>

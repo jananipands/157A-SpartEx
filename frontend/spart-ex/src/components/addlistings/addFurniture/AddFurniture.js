@@ -3,8 +3,11 @@ import React, {useState} from 'react';
 import "./addfurniture.css";
 import { Button } from "@mui/material";
 import UserNavbar from '../../usernavbar/UserNavbar';
+import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 function AddFurniture(){
+    const navigate = useNavigate();
     const [furData, setFurData] = useState({
         item_name: '',
         item_id: null,
@@ -30,7 +33,27 @@ function AddFurniture(){
 
         console.log(furData);
 
-        // pass data to backend database (Create)
+        try {
+            const response = await axios.post("http://localhost:9000/addfurniture", {
+                item_name: furData.item_name,
+                image_url: furData.img_url,
+                appearance: furData.condition,
+                price: furData.price,
+                details: furData.details,
+                appearance_color: furData.color,
+                seller_id: furData.seller_id
+            }).then((res) => {
+                console.log('request sent!')
+                if(res.status >= 200 && res.status < 300){
+                    navigate('/managelistings', {state: {id: furData.seller_id}});
+                } else if (res.status === 401){
+                    alert('Please enter information properly!');
+                }
+            });
+            
+        } catch (err){
+            console.error('Something wrong addfurniture.js: ', err);
+        }
     }
 
 

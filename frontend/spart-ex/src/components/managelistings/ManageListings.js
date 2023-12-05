@@ -5,43 +5,35 @@ import UserNavbar from "../usernavbar/UserNavbar";
 import Item from "../item/Item";
 import AddIcon from '@mui/icons-material/Add';
 import UserItem from '../useritems/UserItem';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
+function ManageListings(props){
+    const [items, setItems] = useState([]);
 
-function ManageListings(){
-    // implement functionality to get user id if they are logged in
-    const user_id = "016384939";
+    let user_id = window.localStorage.getItem("sjsu_id");
+
+    const getItems = () => {
+        axios.get(`http://localhost:9000/getuseritems`).then((res) => {
+            setItems([...res.data]);
+        })
+    }
 
     // backend to-do: retrieve User's listed items from SQL textbook, appliances, and furniture databases and send over here
-        // save as an array of JSON objects
+    // save as an array of JSON objects
 
-    // dummy data for testing
-    const items = [ {
-            item_name: 'Sofa',
-            item_id: 1,
-            img_url: "https://www.ikea.com/us/en/images/products/aepplaryd-sofa-lejde-light-gray__0992909_pe820327_s5.jpg",
-            condition: "Great",
-            price: "$150.00",
-            details: "A comfortable sofa for your living room.",
-            color: "Brown",
-            seller_id: "016384939"
-        }, {
-            item_name: 'Microwave',
-            item_id: 2,
-            img_url: "https://www.ikea.com/us/en/images/products/medelniva-over-the-range-microwave-stainless-steel__0852294_pe780009_s5.jpg?f=s",
-            condition: "Fair",
-            price: "$200.50",
-            details: "A reliable microwave for your kitchen.",
-            color: "Silver",
-            seller_id: "339020488"
-        }
-    ];
+    let listingItems = [];
 
-    const userListings = items.filter(item => item.seller_id === user_id);
-    const listingItems = userListings.map(listing => <UserItem{...listing}/>);
+    if(items !== null){
+        listingItems = items.map(listing => <UserItem{...listing}/>);
+    }
+
+    
 
     return(
         <div className="ml-container">
-            <UserNavbar />
+            <UserNavbar id={user_id}/>
             <Grid container spacing={4} style={{margin: '5%'}}>
                 <Grid item>
                     <Button href='/addlisting' style={{height: '350px', width: '300px'}}>

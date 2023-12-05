@@ -3,6 +3,10 @@ import React, {useState, useEffect} from 'react';
 import "./createaccount.css";
 import { Button } from "@mui/material";
 import { grey } from '@material-ui/core/colors';
+import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
+
+
 
 function CreateAccount(){
     const [userData, setUserData] = useState({
@@ -24,12 +28,34 @@ function CreateAccount(){
         }));
     };
 
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(userData);
-
-        // pass data to backend database (Create)
+        try {
+            const response = await axios.post("http://localhost:9000/adduser", {
+                sjsu_id: userData.sjsu_id,
+                first_name: userData.first_name,
+                last_name: userData.last_name,
+                password: userData.password,
+                phone_number: userData.phone_number,
+                insta_id: userData.insta_id,
+                messenger_id: userData.messenger_id
+            }).then((res) => {
+                console.log('request sent!')
+                if(res.status >= 200 && res.status < 300){
+                    window.localStorage.setItem("sjsu_id", userData.sjsu_id);
+                    navigate('/managelistings');
+                } else if (res.status === 401){
+                    alert('Please enter information properly!');
+                }
+            });
+            
+            
+        } catch (err){
+            console.error('Something wrong createaccount.js: ', err);
+        }
     }
 
 

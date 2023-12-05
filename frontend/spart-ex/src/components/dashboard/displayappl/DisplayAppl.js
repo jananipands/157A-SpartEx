@@ -6,38 +6,33 @@ import UserNavbar from '../../usernavbar/UserNavbar';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
 import Item from '../../item/Item';
+import { useState, useEffect} from 'react';
+import axios from 'axios';
 
 
-function DisplayAppl() {
-    const dummyData = [];
-    const item_type = 'A';
+function DisplayAppl(props) {
+    const data = [];
+    const [appl_items, setApplItems] = useState([]);
 
-    for (let i = 1; i <= 50; i++) {
-        const type = i % 3 === 0 ? 'A' : (i % 3 === 1 ? 'F' : 'T');
+    useEffect(() => {
+        const getAppliance = async (e) => {
+            const response = await axios.get('http://localhost:9000/getappliance').then((res) => {
+                setApplItems([...res.data]);
+            })
+        }
 
-        const dummyObject = {
-            item_name: `Item ${i}`,
-            item_id: i,
-            type,
-            img_url: `https://www.example.com/image${i}.jpg`,
-            condition: i % 3 === 0 ? 'Fair' : (i % 3 === 1 ? 'Great' : 'Poor'),
-            price: `$${(Math.random() * 500).toFixed(2)}`,
-            details: `Details for Item ${i}. Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-            color: i % 2 === 0 ? 'Silver' : 'Brown',
-            seller_id: `SJSU${i}`
-        };
+        getAppliance();
+    }, []);
 
-        dummyData.push(dummyObject);
-    }
+    
 
-    const listItems = dummyData.filter(item => item.type === item_type);
-    const appliances = listItems.map(item => <Item key={item.item_id} {...item} />);
+    const appliances = appl_items.map(item => <Item key={item.item_id} {...item} />);
 
     
     return (
         <div>
-            <UserNavbar />
-            <Grid container spacing={4} style={{ marginTop:'5%', marginInline:'7% 5%'}}>
+            <UserNavbar id={props.id}/>
+            <Grid container spacing={4} style={{ marginTop:'5%', marginInline:'5% 5%'}}>
                 {appliances.map((itemComponent, index) => (
                     <Grid item key={index} style={{marginBottom:'10%'}}>
                         {itemComponent}

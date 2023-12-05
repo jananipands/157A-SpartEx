@@ -11,18 +11,7 @@ Box,
 import ReactDOM from "react-dom";
 import { useState } from "react";
 
-const props = {
-    item_name: "Database Management Systems Textbook",
-    image_url:
-        "https://m.media-amazon.com/images/I/51YWpyc3SjL._AC_UF1000,1000_QL80_.jpg",
-    appearance: "Great",
-    price: "$30.00",
-    subject: "Database Management Systems",
-    details: "This is a textbook that is used for CS 157A.",
-    seller_id: "014651949",
-    seller_name: "Janani Pandurangan",
-    seller_contact: "@janani.pandu",
-};
+
 
 const modal_style = {
     position: "absolute",
@@ -54,47 +43,42 @@ function Item(props) {
     return (
         <div style={{height: '200px', width: '300px'}}>
             <Card sx={{ height: '200px', width: '300px' }}>
-                <CardHeader title={props.item_name} subheader={props.seller_name} />
-                <CardMedia component="img" height="150" image={props.img_url} />
+                <CardHeader title={props.Item_Name} />
+                <CardMedia component="img" height="150" image={props.Image_URL} />
 
                 <CardContent>
-                    <Typography variant="body1">Price: {props.price}</Typography>
-                    <Typography varaint="body1">Condition: {props.condition}</Typography>
+                    <Typography variant="body1">Price: {props.Price}</Typography>
+                    <Typography varaint="body1">Condition: {props.Appearance}</Typography>
                     <Button variant="outlined" onClick={handleOpen}>More info</Button>
                     <Modal open={isOpen} onClose={handleClose} style={{height: 500, width: 500, position:'absolute', margin:'auto'}}>
                         <Box sx={modal_style}>
                             <Card sx={{ height: 450, width: 350 }}>
                                 <CardHeader
-                                    title={props.item_name}
+                                    title={props.Item_Name}
                                     subheader={props.seller_name}
                                 />
                                 <CardContent>
                                     <CardMedia
                                         component="img"
                                         height="150"
-                                        image={props.image_url}
+                                        image={props.Image_URL}
                                     />
 
                                     <Typography variant="body1" style={{ marginTop: 10 }}>
-                                        <strong>Price</strong>: {props.price}
+                                        <strong>Price</strong>: {props.Price}
                                     </Typography>
 
                                     <Typography variant="body1" style={{ overflowWrap: "normal" }}>
-                                        Details: {props.details}
+                                        Details: {props.Details}
                                     </Typography>
 
                                     <Typography varaint="body1">
-                                        Condition: {props.condition}
+                                        Condition: {props.Appearance}
                                     </Typography>
 
                                     <Typography variant="body2" style={{ marginTop: 10 }}>
-                                        Seller: {props.seller_name}
+                                        Seller: {props.Seller_ID}
                                     </Typography>
-
-                                    <Typography variant="body2">
-                                        Seller Contact: {props.seller_contact}
-                                    </Typography>
-
                                 </CardContent>
                             </Card>
                         </Box>

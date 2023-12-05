@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import "./addtextbook.css";
 import { Button } from "@mui/material";
 import UserNavbar from '../../usernavbar/UserNavbar';
+import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 
 function AddTextbook() {
@@ -12,9 +14,12 @@ function AddTextbook() {
         img_url: '',
         condition: '',
         price: '',
+        color: '',
         details: '',
         seller_id: ''
     });
+
+    const navigate = useNavigate();
 
     // ... takes prevData and spreads it
     const handleFormChange = (e) => {
@@ -30,7 +35,27 @@ function AddTextbook() {
 
         console.log(tbookData);
 
-        // pass data to backend database (SQL Create)
+        try {
+            const response = await axios.post("http://localhost:9000/addtextbook", {
+                item_name: tbookData.item_name,
+                image_url: tbookData.img_url,
+                appearance: tbookData.condition,
+                price: tbookData.price,
+                details: tbookData.details,
+                appearance_color: tbookData.color,
+                seller_id: tbookData.seller_id
+            }).then((res) => {
+                console.log('request sent!')
+                if(res.status >= 200 && res.status < 300){
+                    navigate('/managelistings', {state: {id: tbookData.seller_id}});
+                } else if (res.status === 401){
+                    alert('Please enter information properly!');
+                }
+            });
+            
+        } catch (err){
+            console.error('Something wrong addfurniture.js: ', err);
+        }
     }
 
 

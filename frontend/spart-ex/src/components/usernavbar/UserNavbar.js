@@ -13,21 +13,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import LogoutIcon from '@mui/icons-material/Logout';
 import {Grid} from "@mui/material";
 
-function UserNavbar() {
-    const props = {
-        item_name: "Database Management Systems Textbook",
-        image_url:
-            "https://m.media-amazon.com/images/I/51YWpyc3SjL._AC_UF1000,1000_QL80_.jpg",
-        appearance: "Great",
-        price: "$30.00",
-        subject: "Database Management Systems",
-        details: "This is a textbook that is used for CS 157A.",
-        seller_id: "014651949",
-        seller_fname: "Janani",
-        seller_lName: "Pandurangan",
-        seller_contact: "@janani.pandu",
-    };
-
+function UserNavbar(props) {
+   
     const [anchorElUser, setAnchorElUser] = useState(null);
 
     const handleOpenSettingsMenu = (event) => {
@@ -40,26 +27,29 @@ function UserNavbar() {
 
     return (
         <AppBar position="static" style={{ backgroundColor: "white" }}>
-            <Toolbar style={{border: '1px black solid'}}>
+            <Toolbar>
                 <img src={require('./logo-white.png')} style={{ width: 184, height: 60 }} />
                 <Grid container direction='row' spacing={2} style={{marginLeft: '10%', marginRight:'10%',justifyContent:'space-between'}}>
                         <Grid item>
                             <Typography variant='body1'>
-                                <Link to="/appliances" style={{color: '#464646', textDecoration:'none'}}>
+                                <Link  to={{pathname: "/appliances",
+                                    state:{id: props.id}}} style={{color: '#464646', textDecoration:'none'}}>
                                     <span>Appliances</span>
                                 </Link>
                             </Typography>
                         </Grid>
                         <Grid item>
                             <Typography variant='body1'>
-                                <Link to="/furniture" style={{color: '#464646', textDecoration:'none'}}>
+                                <Link to={{pathname: "/furniture",
+                                    state:{id: props.id}}} style={{color: '#464646', textDecoration:'none'}}>
                                     Furniture
                                 </Link>
                             </Typography>
                         </Grid>
                         <Grid item>
                             <Typography variant='body1'>
-                                <Link to="/textbooks" style={{color: '#464646', textDecoration:'none'}}>
+                                <Link  to={{pathname: "/textbooks",
+                                    state:{id: props.id}}} style={{color: '#464646', textDecoration:'none'}}>
                                     Textbooks
                                 </Link>
                             </Typography>
@@ -72,10 +62,6 @@ function UserNavbar() {
                             <AccountCircleIcon
                                 style={{ backgroundColor: "white", color: "#0055A2" }}
                             />
-
-                            <Typography style={{ marginLeft: 10, color: "black" }}>
-                                {props.seller_fname}
-                            </Typography>
                         </IconButton>
                     </Tooltip>
                     <Menu
@@ -91,10 +77,12 @@ function UserNavbar() {
                     >
                         <MenuItem key="manage_listing" onClick={handleCloseSettingsMenu}>
                             <EditIcon style={{backgroundColor: "white", color: "gray"}}/>
-                            <Link to="/managelistings" style={{textAlign: "center",
-                             color: "gray",
-                             textDecoration: "none",
-                             marginLeft: 5 }}>
+                            <Link to="/managelistings" style={{
+                                textAlign: "center",
+                                color: "gray",
+                                textDecoration: "none",
+                                marginLeft: 5
+                            }}>
                                 Manage Listings</Link>
                         </MenuItem>
 

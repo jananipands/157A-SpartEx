@@ -5,7 +5,8 @@ import { Avatar, Grid, Paper, Typography } from '@material-ui/core';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import { Button } from "@mui/material";
 import ReactDOM from "react-dom";
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Link, useNavigate} from 'react-router-dom';
 
 
 function Login(){
@@ -13,10 +14,28 @@ function Login(){
     const[sjsuid, setSJSUID] = useState("");
     const[password, setPassword] = useState("");
 
-    const handleSubmit = () => {
-        console.log(sjsuid);
+    const navigate = useNavigate();
 
-        // finish login logic here!
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post("http://localhost:9000/loginuser", {
+                sjsuid: sjsuid, 
+                password: password
+            }).then((res) => {
+                if(res.status >= 200 && res.status < 300){
+                   console.log(res.data);
+                   window.localStorage.setItem("sjsu_id", sjsuid);
+                   navigate('/managelistings', {state: {id: sjsuid}});
+                } else if (res.status === 401){
+                    alert('Bad Credentials, please login again!');
+                }
+            });
+            
+        } catch (err){
+            console.error('Something wrong login.js: ', err);
+        }
     }
 
     return (
