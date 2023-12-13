@@ -7,20 +7,30 @@ import AddIcon from '@mui/icons-material/Add';
 import UserItem from '../useritems/UserItem';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function ManageListings(props){
     const [items, setItems] = useState([]);
 
     let user_id = window.localStorage.getItem("sjsu_id");
 
-    const getItems = () => {
-        axios.get(`http://localhost:9000/getuseritems`).then((res) => {
-            setItems([...res.data]);
-        })
+    useEffect(() => {
+        const getItems = () => {
+            axios.get(`http://localhost:9000/getuseritems${user_id}`).then((res) => {
+                setItems([...res.data]);
+            })
+        }
+
+        getItems();
+    }, [items.length])
+    
+
+    const handleDeleteItem = (item_id_delete) => {
+        setItems((prevItems) => prevItems.filter(item => item.Item_ID != item_id_delete));
     }
 
     // backend to-do: retrieve User's listed items from SQL textbook, appliances, and furniture databases and send over here
+    // still not working - need to parse JSON objects that are sent
     // save as an array of JSON objects
 
     let listingItems = [];
@@ -45,7 +55,7 @@ function ManageListings(props){
                 </Grid>
                 {listingItems.map((itemComponent, index) => (
                     <Grid item key={index}>
-                        {itemComponent}
+                        {React.cloneElement(itemComponent, {onDelete: handleDeleteItem})}
                     </Grid>
                 ))}
             </Grid>

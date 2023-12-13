@@ -12,6 +12,7 @@ import AddListing from './components/addlistings/AddListing';
 import DisplayAppl from './components/dashboard/displayappl/DisplayAppl';
 import DisplayFurniture from './components/dashboard/displayfurniture/DisplayFurniture';
 import DisplayTextbook from './components/dashboard/displaytextbook/DisplayTextbook';
+import UpdateListing from './components/updatelisting/UpdateListing';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/appliances" element={<DisplayAppl />} />
         <Route path="/furniture" element={<DisplayFurniture />} />
         <Route path="/textbooks" element={<DisplayTextbook />} />
+        <Route path="/updatelisting" element={<UpdateListing />} />
       </Routes>
     </BrowserRouter>
   );
