@@ -93,59 +93,92 @@ app.post("/loginuser", (req, res) => {
     });
 });
 
-app.get("/getuseritems", (req, res) => {
-    console.log("request", req);
-    const id = window.localStorage.getItem("sjsu_id");
-    console.log("req.body", req.body);
+app.get("/getuseritems:id", (req, res) => {
+    const id = req.params.id;
 
-    console.log(id);
+    let query1 = 'SELECT * FROM TEXTBOOK WHERE SELLER_ID = ? UNION';
+    let query2 = ' SELECT * FROM FURNITURE WHERE SELLER_ID = ? UNION';
+    let query3 = ' SELECT * FROM APPLIANCE WHERE SELLER_ID = ?';
 
-    var items = [];
+    let query = query1.concat(query2, query3);
 
-    let query = 'SELECT * FROM TEXTBOOK WHERE SELLER_ID = ?';
-    db.query(query,[id], (err, results) => {
+    db.query(query, [id, id, id], (err, results) => {
         if(err){
             res.status(500).send("DB Insertion error!");
         } else {
             if(results.length >= 0){
-                items.push(...results);
-                res.status(200).send('success!')
+                res.status(200).json(results);
             } else {
                 res.status(401).send('Could not retrieve');
             }
         }
     });
-
-    let query1 = 'SELECT * FROM APPLIANCE WHERE SELLER_ID = ?';
-    db.query(query,[id], (err, results) => {
-        if(err){
-            res.status(500).send("DB Insertion error!");
-        } else {
-            if(results.length >= 0){
-                items.push(...results);
-                res.status(200).send('success!')
-            } else {
-                res.status(401).send('Could not retrieve');
-            }
-        }
-    });
-
-    let query2 = 'SELECT * FROM FURNITURE WHERE SELLER_ID = ?';
-    db.query(query,[id], (err, results) => {
-        if(err){
-            res.status(500).send("DB Insertion error!");
-        } else {
-            if(results.length >= 0){
-                items.push(...results);
-                res.status(200).send('success!')
-            } else {
-                res.status(401).send('Could not retrieve');
-            }
-        }
-    });
-
-    res.json(items);
 });
+
+app.get("/getuserdetails:id", (req, res) => {
+    const id = req.params.id;
+
+    let query1 = 'SELECT * FROM TEXTBOOK WHERE SELLER_ID = ?';
+
+    db.query(query1, [id], (err, results) => {
+        if(err){
+            res.status(500).send("DB Retrieval error!");
+        } else {
+            if(results.length >= 0){
+                res.status(200).json(results);
+            } else {
+                res.status(401).send('Could not retrieve');
+            }
+        }
+    });
+});
+
+
+app.post('/deletelisting', (req, res) => {
+    const { seller_id, item_id } = req.body; // Use req.body instead of req.query for POST requests
+  
+    let query = 'CALL delete_listing(?, ?)';
+    db.query(query, [seller_id, item_id], (err, results) => {
+      if (err) {
+        res.status(500).send('DB deletion error!');
+      } else {
+        console.log(results);
+        if (results.affectedRows === 1) {
+          res.status(200).send('ok');
+        } else {
+          res.status(401).send('Cannot delete listing.');
+        }
+      }
+    });
+});
+
+app.post('/updatelisting', (req, res) => {
+    const { item_id,
+            item_name,
+            image_url,
+            appearance,
+            price,
+            details,
+            appearance_color,
+            seller_id, } = req.body; // Use req.body instead of req.query for POST requests
+    console.log(seller_id, item_id);
+  
+    let query = 'CALL update_listing(?, ?, ?, ?, ?, ?, ?, ?)';
+    db.query(query, [seller_id, item_id, item_name, image_url, appearance, price, details, appearance_color], (err, results) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('DB deletion error!');
+      } else {
+        console.log(results);
+        if (results.affectedRows === 1) {
+          res.status(200).send('ok');
+        } else {
+          res.status(401).send('Cannot delete listing.');
+        }
+      }
+    });
+});
+  
 
 
 app.post("/adduser", (req, res) => {
