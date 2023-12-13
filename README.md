@@ -1,15 +1,7 @@
-# 157A-SpartEx
+# 157A Spartex
 
-## To-do Janani:
-- [X] Item card and Modal Component w/ props
-- [X] Dashboard/See Listings page
-- [X] Create new user account page
-- [X] Manage Listings page (with functionality to add or remove current listings), not sure how to update?
-- [X] Add Furniture (done), Appliance (done), and Textbook pages
-- [ ] Figure out data transmission from frontend to backend
+## To do Gunraj:
+-[] Fill out README.md with necessary info
 
-## To-do Gunraj:
-- [X] Set up SQL databases locally
-- [ ] **Set up connection to SQL database via NodeJS**
-- [ ] Make Schemas for each database
-- [ ] Ensure that data acquired from page is sent to Backend
+## To do Janani:
+- [] Help Gunraj with ReadME and add nzare as contributor
